@@ -7,9 +7,11 @@ interface StatCounterProps {
   icon: React.ReactNode;
   suffix?: string;
   delay?: number;
+  variant?: 'default' | 'danger' | 'success' | 'warning';
 }
 
-export default function StatCounter({ value, label, icon, suffix = '', delay = 0 }: StatCounterProps) {
+export default function StatCounter({ value, label, icon, suffix = '', delay = 0, variant = 'default' }: StatCounterProps) {
+  const iconColor = variant === 'danger' ? 'text-destructive' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : 'text-primary';
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -46,8 +48,9 @@ export default function StatCounter({ value, label, icon, suffix = '', delay = 0
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
       {/* Icon */}
-      <div className="text-primary mb-3 relative z-10">
+      <div className={`${iconColor} mb-3 relative z-10 flex items-center justify-between`}>
         {icon}
+        {variant === 'danger' && <div className="w-2 h-2 rounded-full bg-destructive animate-pulse" />}
       </div>
       
       {/* Counter */}
