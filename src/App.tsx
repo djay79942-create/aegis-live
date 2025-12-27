@@ -8,6 +8,7 @@ import ReportPage from "./pages/ReportPage";
 import DashboardPage from "./pages/DashboardPage";
 import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";
+import SignUp from "./pages/signup";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="signup" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
