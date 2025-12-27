@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        display: ['Orbitron', 'sans-serif'],
+        display: ['Rajdhani', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -66,6 +66,7 @@ export default {
         glow: {
           primary: "hsl(var(--glow-primary))",
           accent: "hsl(var(--glow-accent))",
+          danger: "hsl(var(--glow-danger))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -96,16 +97,32 @@ export default {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "fade-in-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
         "slide-in-right": {
           from: { opacity: "0", transform: "translateX(20px)" },
           to: { opacity: "1", transform: "translateX(0)" },
         },
+        "slide-in-left": {
+          from: { opacity: "0", transform: "translateX(-20px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
         "pulse-glow": {
           "0%, 100%": { 
-            boxShadow: "0 0 5px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3)" 
+            boxShadow: "0 0 10px hsl(var(--primary) / 0.5), 0 0 30px hsl(var(--primary) / 0.3)" 
           },
           "50%": { 
-            boxShadow: "0 0 20px hsl(var(--primary) / 0.8), 0 0 40px hsl(var(--primary) / 0.5)" 
+            boxShadow: "0 0 25px hsl(var(--primary) / 0.8), 0 0 50px hsl(var(--primary) / 0.5)" 
+          },
+        },
+        "pulse-danger": {
+          "0%, 100%": { 
+            boxShadow: "0 0 10px hsl(var(--destructive) / 0.5), 0 0 30px hsl(var(--destructive) / 0.3)" 
+          },
+          "50%": { 
+            boxShadow: "0 0 25px hsl(var(--destructive) / 0.8), 0 0 50px hsl(var(--destructive) / 0.5)" 
           },
         },
         "scan": {
@@ -116,25 +133,34 @@ export default {
           from: { backgroundPosition: "200% 0" },
           to: { backgroundPosition: "-200% 0" },
         },
-        "count-up": {
-          from: { opacity: "0", transform: "scale(0.5)" },
-          to: { opacity: "1", transform: "scale(1)" },
+        "radar-sweep": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        "blink": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.3" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out forwards",
+        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "slide-in-right": "slide-in-right 0.5s ease-out forwards",
+        "slide-in-left": "slide-in-left 0.5s ease-out forwards",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "pulse-danger": "pulse-danger 1.5s ease-in-out infinite",
         "scan": "scan 3s ease-in-out infinite",
         "shimmer": "shimmer 3s ease-in-out infinite",
-        "count-up": "count-up 0.5s ease-out forwards",
+        "radar-sweep": "radar-sweep 4s linear infinite",
+        "blink": "blink 1s ease-in-out infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "grid-pattern": "linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px)",
-        "shimmer": "linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.1) 50%, transparent 100%)",
+        "grid-pattern": "linear-gradient(hsl(var(--primary) / 0.08) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary) / 0.08) 1px, transparent 1px)",
+        "shimmer": "linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.15) 50%, transparent 100%)",
+        "tactical-gradient": "linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, transparent 50%, hsl(var(--accent) / 0.1) 100%)",
       },
     },
   },
