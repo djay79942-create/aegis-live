@@ -233,7 +233,7 @@ const Login = () => {
         </h2>
 
         <p className="text-center text-gray-500 text-sm mt-1 mb-8">
-          Login to your healthcare account
+          Login to your intelligence platform  account
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-7">
