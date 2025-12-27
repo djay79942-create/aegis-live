@@ -43,7 +43,7 @@ const SignUp = () => {
         </h2>
 
         <p className="text-center text-sm text-gray-400 mt-2 mb-10">
-          Start your healthcare journey
+          Start your journey with our platform
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-8">

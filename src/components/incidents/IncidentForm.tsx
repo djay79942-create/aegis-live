@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+
 import { 
   Flame, Car, Heart, CloudLightning, Wrench,
   MapPin, Camera, Send, Loader2, CheckCircle2
@@ -31,6 +32,24 @@ export default function IncidentForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isGettingLocation, setIsGettingLocation] = useState(false);
+const [imageFile, setImageFile] = useState<File | null>(null);
+const [imagePreview, setImagePreview] = useState<string | null>(null);
+const [uploadingImage, setUploadingImage] = useState(false);
+
+const handleImageSelect = (file: File) => {
+  if (!file.type.startsWith("image/")) {
+    toast.error("Only images allowed");
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    toast.error("Max image size is 5MB");
+    return;
+  }
+
+  setImageFile(file);
+  setImagePreview(URL.createObjectURL(file));
+};
 
   const handleGetLocation = () => {
     setIsGettingLocation(true);
@@ -230,7 +249,7 @@ export default function IncidentForm() {
       </div>
 
       {/* Image Upload (placeholder) */}
-      <div>
+      {/* <div>
         <label className="block text-sm font-medium text-foreground mb-4 font-display tracking-wide uppercase">
           Photo Evidence (Optional)
         </label>
@@ -240,7 +259,59 @@ export default function IncidentForm() {
             Click to upload or drag and drop
           </p>
         </div>
-      </div>
+      </div> */}
+      <div>
+  <label className="block text-sm font-medium mb-4 uppercase">
+    Photo Evidence (Optional)
+  </label>
+
+  <div
+    onDragOver={(e) => e.preventDefault()}
+    onDrop={(e) => {
+      e.preventDefault();
+      handleImageSelect(e.dataTransfer.files[0]);
+    }}
+    className="relative border-2 border-dashed border-border rounded-xl p-8 text-center cursor-pointer hover:border-primary/50 transition"
+  >
+    {!imagePreview ? (
+      <label className="cursor-pointer">
+        <Camera className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+        <p className="text-sm text-muted-foreground">
+          Click to upload or drag & drop
+        </p>
+
+        <input
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={(e) =>
+            e.target.files && handleImageSelect(e.target.files[0])
+          }
+        />
+      </label>
+    ) : (
+      <>
+        <img
+          src={imagePreview}
+          className="absolute inset-0 w-full h-full object-cover rounded-xl"
+        />
+        <div className="absolute inset-0 bg-black/40 rounded-xl" />
+
+        <button
+          type="button"
+          onClick={() => {
+            setImageFile(null);
+            setImagePreview(null);
+          }}
+          className="absolute top-3 right-3 bg-red-500 px-3 py-1 text-xs rounded-full text-white"
+        >
+          Remove
+        </button>
+      </>
+    )}
+  </div>
+</div>
+
 
       {/* Submit */}
       <Button
